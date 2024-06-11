@@ -14,7 +14,7 @@ function input_field($label, $type, $name, $placeholder = "", $pattern = "") {
     if ($pattern != "") {
         echo '" pattern="' . $pattern;
     }
-    echo '">';
+    echo '" class="form_field">';
 }
 
 # Elemento Checkbox
@@ -29,12 +29,12 @@ function checkbox($text, $name, $onclick = "") {
 
 # Elemento Boton
 function button($text, $name) {
-    echo '<button type="submit" name="' . $name . '" value="'. $name .'">' . $text . '</button>';
+    echo '<button type="submit" name="' . $name . '" value="'. $name .'" class="btn form_btn">' . $text . '</button>';
 }
 
 # Elemento A (Link)
 function a($text, $url) {
-    echo '<a href="' . $url . '">' . $text . '</a>';
+    echo '<a href="' . $url . '" class="a_link">' . $text . '</a>';
 }
 
 # Elemento A en P (Link en párrafo)
@@ -50,10 +50,10 @@ function p_a_p($text, $url, $p_left = "", $p_right = "") {
     echo '</p>';
 }
 
-# Header
+# Navbar
 function navbar() {
     echo '<div class="top-nav">';
-    echo '<a href="#">ShoppingLogo</a>';
+    shopping_logo(50);
     echo '<nav class="nav-links">';
     echo '<a href="#">El Shopping</a>';
     echo '<a href="#">Servicios</a>';
@@ -70,6 +70,15 @@ function navbar() {
         echo '<a href="signup.php">Registrarse</a>';
     }
     echo '</div></div>';
+}
+
+function shopping_logo(float $width, float $height = -1) {
+    if($height > 0) {
+        echo '<a href="index.php"><img src="./images/logo.png" width="'.$width.'px" height="'.$height.'px"></a>';
+    } else {
+        echo '<a href="index.php"><img src="./images/logo.png" width="'.$width.'px"></a>';
+
+    }
 }
 
 ?>

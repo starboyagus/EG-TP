@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start(); # Iniciar/Reanudar sesión ?>
 
 <!DOCTYPE html>
 <html lang="es">

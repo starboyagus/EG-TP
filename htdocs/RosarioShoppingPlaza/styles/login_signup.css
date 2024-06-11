@@ -1,0 +1,51 @@
+.login_signup_container {
+    width: 20em;
+    color: white;
+    background-color: rgb(45, 58, 73);
+    margin:auto;
+    padding: 2em;
+    border: 1px solid rgb(50, 53, 56);
+    border-radius: 1em;
+}
+
+label {
+    margin: 0;
+}
+
+.form_field {
+    width: 100%;
+    color: rgb(27, 30, 34);
+    background-color: rgb(237, 241, 248);
+    border: 1px solid rgb(50, 53, 56);
+    border-radius: 0.25em;
+    padding: 6px;
+}
+
+input[type="checkbox"] {
+    margin-right: 6px;
+}
+
+input::placeholder {
+    color: rgb(120, 123, 126);
+    opacity: 1;
+}
+
+.form_btn {
+    color: white;
+    background-color: rgb(73, 99, 172);
+    border: none
+}
+
+.form_btn:hover {
+    color: white;
+    background-color: rgb(97, 122, 192);
+}
+
+.a_link {
+    color: rgb(149, 170, 230);
+    text-decoration: none;
+}
+
+.a_link:hover {
+    color: rgb(180, 196, 240);
+}
