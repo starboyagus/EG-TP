@@ -1,0 +1,68 @@
+:root {
+    /* Dark Mode*/
+    --dm-primary: #7CF0BD;
+    --dm-secondary: #227C55;
+    --dm-accent: #59D59F;
+    --dm-background: #050F0B;
+    --dm-text: #DBF2E8;
+    /* Light Mode*/
+    --lm-primary: #108452;
+    --lm-secondary: #83DDB6;
+    --lm-accent: #2AA771;
+    --lm-background: #F0FAF6;
+    --lm-text: #0E251B;
+}
+
+#navbarNav, #navbarBtns {
+    display: inline-flex;
+}
+
+.form-container {
+    color: white;
+    background-color: rgb(45, 58, 73);
+    margin:auto;
+    padding: 2em;
+    border: 1px solid rgb(50, 53, 56);
+    border-radius: 1em;
+}
+
+.form-container-login {
+    width: 20em;
+}
+
+.form-container-signup {
+    width: 30em;
+}
+
+.form-container-local {
+    width: 70em;
+}
+
+.checkbox {
+    margin-right: 6px;
+}
+
+.input::placeholder {
+    color: rgb(120, 123, 126);
+    opacity: 1;
+}
+
+.form-btn {
+    color: white;
+    background-color: rgb(73, 99, 172);
+    border: none;
+}
+
+.form-btn:hover {
+    color: white;
+    background-color: rgb(97, 122, 192);
+}
+
+.a-link {
+    color: rgb(149, 170, 230);
+    text-decoration: none;
+}
+
+.a-link:hover {
+    color: rgb(180, 196, 240);
+}
