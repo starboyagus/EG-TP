@@ -12,15 +12,13 @@ if (isset($_SESSION["logged"])) {
     <title>Rosario Shopping Plaza</title>
     <!-- Estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Kit de iconos -->
+    <script src="https://kit.fontawesome.com/e94f1b6b83.js" crossorigin="anonymous"></script>
     <!-- Estilos propios -->
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <?php include('components.php');    # Incluir librería de componentes
-    
-    echo '<nav class="navbar navbar-expand">';
-    shopping_logo(50);
-    echo '</nav>';
+    <?php include('navbar.php');
     
     # Si el formulario ha sido enviado se ejecuta lo siguiente
     if(isset($_POST["login"])) {
@@ -55,6 +53,8 @@ if (isset($_SESSION["logged"])) {
     }
     ?>
 
+    <br>
+    
     <div class="form-container form-container-login">
         <h1>Iniciar sesión</h1>
         <!-- Formulario -->

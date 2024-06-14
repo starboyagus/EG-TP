@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <?php include('components.php');    # Incluir librería de componentes
+    <?php include('navbar.php');
     include('db_connection.php');
-    navbar();
+    
 
     # Verifica si se encuentra la id de algún local en la URL
     if(isset($_GET['id'])) { # Si la encuentra
@@ -31,7 +31,11 @@
         </p>
         <?php
     } else { # Sino
-        $query = "SELECT * FROM locales";
+        if(isset($_GET['category'])){
+            $query = "SELECT * FROM locales l WHERE l.rubroLocal='" . $_GET['category'] . "'";
+        } else {
+            $query = "SELECT * FROM locales";
+        }
         $result = mysqli_query($connection, $query);
         ?> <div class="abc row row-cols-1 row-cols-lg-2 row-cols-xxl-3 g-4"> <?php
         while($row = mysqli_fetch_assoc($result)) { ?>
@@ -53,6 +57,8 @@
     if(isset($_SESSION['userType']) && $_SESSION['userType'] == 1) {
         $result = mysqli_query($connection, "SELECT * FROM rubros_local");
         ?>
+        <br>
+        
         <div class="form-container form-container-local">        
             <h1>Crear Local</h1>
             <form action="locales_alta.php" method="POST" class="row g-3">
@@ -91,6 +97,9 @@
     mysqli_close($connection);
     }
     ?>
+
+    <!-- Script de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
 
