@@ -11,6 +11,11 @@
     --lm-accent: #2AA771;
     --lm-background: #F0FAF6;
     --lm-text: #0E251B;
+    
+}
+
+body {
+    background-color: rgb(255, 249, 238);
 }
 
 #navbarNav, #navbarBtns {
@@ -23,7 +28,7 @@
     margin:auto;
     padding: 2em;
     border: 1px solid rgb(50, 53, 56);
-    border-radius: 1em;
+    border-radius: 0.5em;
 }
 
 .form-container-login {
@@ -31,23 +36,37 @@
 }
 
 .form-container-signup {
-    width: 30em;
+    width: 35em;
 }
 
 .form-container-local {
     width: 70em;
 }
 
-.checkbox {
-    margin-right: 6px;
-}
-
-.input::placeholder {
+.placeholder-label, .input::placeholder {
     color: rgb(120, 123, 126);
     opacity: 1;
 }
 
-.form-btn {
+.btn-create-local, .btn-create-local:enabled {
+    height: 100%;
+    color: white;
+    background-color: #2AA771;
+    border: 1px solid #227C55
+}
+
+.btn-create-local:hover {
+    height: 100%;
+    color: white;
+    background-color: #59D59F;
+    border: 1px solid #108452;
+}
+
+.checkbox {
+    margin-right: 6px;
+}
+
+.form-btn, .form-btn:enabled {
     color: white;
     background-color: rgb(73, 99, 172);
     border: none;
@@ -65,4 +84,9 @@
 
 .a-link:hover {
     color: rgb(180, 196, 240);
+}
+
+.abc {
+    margin: 0 auto;
+    width: 75%;
 }
