@@ -16,5 +16,8 @@
 <body>
     <?php include('navbar.php');
     ?>
+    <h1 class="text-center mt-5 mb-5" > Bienvenido a Minecraft </h1>
+    <?php include('footer.php');
+    ?>
 </body>
 </html>

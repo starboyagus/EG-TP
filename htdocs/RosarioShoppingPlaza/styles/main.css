@@ -10,17 +10,23 @@ body {
     background-color: rgb(255, 249, 238);
 }
 
-nav {
+nav, footer {
     background-color: var(--primary);
 }
 
-.nav_item {
+
+
+.nav_item, .footer-item {
     text-decoration: none;
     color: var(--text);
+    animation: ease-in-out;
+    transition: .2;
 }
 
-.nav_item:hover {
+.nav_item:hover, .footer-item:hover {
     color: var(--secondary);
+    animation: ease-in-out;
+    transition: .2s;
 }
 
 #searchbar {
@@ -155,4 +161,9 @@ nav {
 .filter-container {
     margin: 0 auto;
     width: 75%;
+}
+
+
+.footer-text{
+    color: var(--white);
 }

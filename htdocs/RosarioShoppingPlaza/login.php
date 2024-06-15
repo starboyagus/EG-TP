@@ -99,5 +99,7 @@ if (isset($_SESSION["logged"])) {
             }
         }
     </script>
+
+    <?php include('footer.php'); ?>
 </body>
 </html>

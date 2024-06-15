@@ -56,7 +56,7 @@ if (isset($_SESSION["logged"])) {
 
     <br>
     
-    <div class="form-container form-container-signup">
+    <div class="form-container form-container-signup ">
         <h1>Registrarse</h1>
         <!-- Formulario -->
         <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="POST" class="row g-3">
@@ -118,5 +118,7 @@ if (isset($_SESSION["logged"])) {
             }
         }
     </script>
+    <?php include('footer.php');
+    ?>
 </body>
 </html>
