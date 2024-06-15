@@ -56,8 +56,8 @@ if (isset($_SESSION["logged"])) {
 
     <br>
     
-    <div class="form-container form-container-signup ">
-        <h1>Registrarse</h1>
+    <h1 class="form-header">Registrarse</h1>
+    <div class="container form-container" style="max-width:35em;">
         <!-- Formulario -->
         <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="POST" class="row g-3">
             <!-- Campo Nombre -->
@@ -100,10 +100,10 @@ if (isset($_SESSION["logged"])) {
                 </div>
             </div>
             <div class="col-12">
-            <button type="submit" name="signup" id="signup" class="btn form-control form-btn">Ingresar</button>
+            <button type="submit" name="signup" id="signup" class="btn form-control form-btn">Registrarse</button>
             </div>
         </form>
-        <div class="mt-3 mb-0">¿Ya tienes una cuenta?<a href="login.php" class="a-link"> Inicia Sesión</a></div>
+        <div class="mt-2 mb-0">¿Ya tienes una cuenta?<a href="login.php" class="a-link"> Inicia Sesión</a></div>
     </div>
 
     <!-- Script en JS para mostrar y ocultar el campo contraseña -->

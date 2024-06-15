@@ -1,4 +1,4 @@
-<footer class="mt-4 text-center text-lg-start footer-text">
+<footer class="footer mt-4 text-center text-lg-start footer-text">
     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
         <div class="me-5 d-none d-lg-block">
             <span>Conectate con nosotros en las redes sociales:</span>

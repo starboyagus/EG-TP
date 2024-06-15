@@ -1,3 +1,4 @@
+/* Generales */
 :root {
     --primary: #354252;
     --text: #fafafa;
@@ -10,11 +11,12 @@ body {
     background-color: rgb(255, 249, 238);
 }
 
-nav, footer {
+/* Generales */
+/* Nav */
+
+.navbar, .footer {
     background-color: var(--primary);
 }
-
-
 
 .nav_item, .footer-item {
     text-decoration: none;
@@ -81,28 +83,34 @@ nav, footer {
     width: 50px;
 }
 
-.avbar-logout {
+.navbar-logout {
     width: 150px;
+}
+
+/* Nav */
+/* Footer */
+
+
+.footer-text{
+    color: var(--white);
+}
+
+/* Footer */
+/* Formularios */
+
+.form-header {
+    margin: auto;
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 8px;
 }
 
 .form-container {
     color: white;
     background-color: var(--primary);
-    margin:auto;
+    margin: 0 auto;
     padding: 2em;
     border-radius: 0.5em;
-}
-
-.form-container-login {
-    width: 20em;
-}
-
-.form-container-signup {
-    width: 35em;
-}
-
-.form-container-local {
-    width: 70em;
 }
 
 .placeholder-label, .input::placeholder {
@@ -124,10 +132,6 @@ nav, footer {
     border: 1px solid #108452;
 }
 
-.checkbox {
-    margin-right: 6px;
-}
-
 .form-btn, .form-btn:enabled {
     color: white;
     background-color: var(--secondary);
@@ -139,6 +143,9 @@ nav, footer {
     background-color: var(--secondary-dark);
 }
 
+/* Formularios */
+/* Links */
+
 .a-link {
     color: rgb(149, 170, 230);
     text-decoration: none;
@@ -147,6 +154,9 @@ nav, footer {
 .a-link:hover {
     color: rgb(180, 196, 240);
 }
+
+/* Links */
+/* Cards */
 
 .card-container {
     margin: 0 auto;
@@ -158,12 +168,59 @@ nav, footer {
     width: 60%;
 }
 
-.filter-container {
-    margin: 0 auto;
-    width: 75%;
+/* Cards */
+/* Admin Tools */
+
+.admin-tools {
+    background-color: rgb(196, 204, 219);
 }
 
+.btn-tool {
+    color: white;
+    background-color: var(--secondary);
 
-.footer-text{
-    color: var(--white);
+    &:hover {
+        color: white;
+        background-color: var(--secondary-dark);
+    }
+
+    &:active {
+        color: white;
+        background-color: var(--secondary);
+    }
 }
+
+.btn-outline-tool {
+    color: white;
+    background-color: var(--secondary);
+    border-left: 1px solid rgb(196, 204, 219);
+    border-right: 1px solid rgb(196, 204, 219);
+
+    &:hover {
+        color: white;
+        background-color: var(--secondary-dark);
+    }
+
+    &:active {
+        color: white;
+        background-color: var(--secondary);
+    }
+}
+
+/* Admin Tools */
+/* Tablas */
+
+
+
+/* Tablas */
+/* Paginación */
+
+.actual-page {
+    color: var(--primary);
+
+    &:hover {
+        color: var(--primary);
+    }
+}
+
+/* Paginación */

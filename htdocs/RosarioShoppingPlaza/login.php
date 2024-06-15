@@ -38,14 +38,14 @@ if (isset($_SESSION["logged"])) {
                 exit;
             } else {
                 ?>
-                <div class="alert alert-warning" role="alert">
+                <div class="alert alert-danger" role="alert">
                     Contraseña incorrecta
                 </div>
                 <?php
             }
         } else {
             ?>
-            <div class="alert alert-warning" role="alert">
+            <div class="alert alert-danger" role="alert">
                 No se ha encontrado un usuario con ese email
             </div>
             <?php
@@ -54,9 +54,8 @@ if (isset($_SESSION["logged"])) {
     ?>
 
     <br>
-    
-    <div class="form-container form-container-login">
-        <h1>Iniciar sesión</h1>
+    <h1 class="form-header">Iniciar sesión</h1>
+    <div class="container form-container" style="max-width:25em;">
         <!-- Formulario -->
         <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="POST" class="row g-3">
             <!-- Campo Email -->
@@ -65,24 +64,30 @@ if (isset($_SESSION["logged"])) {
                 <input type="email" name="email" id="email" class="form-control" placeholder="nombre@ejemplo.com" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$">
             </div>
 
-            <!-- Campo Contraseña-->
+            <!-- Campo Contraseña -->
             <div class="col-12">
-                <label for="pass" class="form-label">Contraseña</label>
+                <div class="row">
+                    <div class="col col-4">
+                        <label for="pass" class="form-label">Contraseña</label>
+                    </div>
+                    <div class="col col-8">
+                        <p class="text-end m-0"><a href="#" class="a-link"><small>Recuperar contraseña</small></a></p>
+                    </div>
+                </div>
                 <div class="input-group">
                     <input type="password" name="pass" id="pass" class="form-control" placeholder="Contraseña">
                     <div class="input-group-text">
                         <input type="checkbox" name="cb-pass" id="cb-pass" class="form-check-input mt-0" onclick="reveal_password('pass')">
                     </div>
                 </div>
-                <div><a href="#" class="a-link">Recuperar contraseña</a></div>
             </div>
 
-            <!-- Boton Submit-->
+            <!-- Boton Submit -->
             <div class="col-12">
             <button type="submit" name="login" id="login" class="btn form-control form-btn">Ingresar</button>
             </div>
         </form>
-        <div>¿No tienes una cuenta? <a href="signup.php" class="a-link">Registrate</a></div>
+        <div class="mt-2 mb-0">¿No tienes una cuenta? <a href="signup.php" class="a-link">Registrate</a></div>
     </div>
         
     <!-- Script de Bootstrap -->

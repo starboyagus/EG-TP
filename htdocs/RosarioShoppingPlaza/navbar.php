@@ -14,7 +14,7 @@
                     <a class="nav-link nav_item" href="servicios.php">Servicios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav_item" href="contacto.php">Contacto</a>
+                    <a class="nav-link nav_item" href="contacto.php">Contactanos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link nav_item" href="locales.php">Locales</a>
@@ -53,4 +53,3 @@
         </div>
     </div>
 </nav>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

@@ -15,6 +15,11 @@
 </head>
 <body>
     <?php include('navbar.php');
+
+    $tools = 'locales';
+    include('admin_tools.php');
+    unset($tools);
+
     include('db_connection.php');
     extract($_GET);
 
@@ -84,51 +89,7 @@
         ?> </div> <?php
         mysqli_free_result($result);
     }
-
-    # Verifica si el usuario está loggeado y es administrador
-    if(isset($_SESSION['userType']) && $_SESSION['userType'] == 1) {
-        $result = mysqli_query($connection, "SELECT * FROM rubros_local");
-        ?>
-        <br>
-        
-        <div class="form-container form-container-local">        
-            <h1>Crear Local</h1>
-            <form action="locales_alta.php" method="POST" class="row g-3">
-                <div class="col-11">
-                    <div class="input-group">
-                        <div class="form-floating">
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Nombre del Local">
-                            <label for="name" class="placeholder-label">Nombre del Local</label>
-                        </div>
-                        <select name="ubi" id="ubi" class="form-select">
-                            <option>Planta baja</option>
-                            <option>Piso 1</option>
-                            <option>Piso 2</option>
-                            <option>Piso 3</option>
-                        </select>
-                        <select name="category" id="category" class="form-select">
-                            <?php
-                            while($row = mysqli_fetch_assoc($result)) { 
-                                ?>
-                                <option value="<?= $row['codRubro']; ?>"><?= $row['nombreRubro']; ?></option>
-                                <?php
-                            }
-                            ?>
-                        </select>
-                        <div class="form-floating">
-                            <input type="text" name="owner" id="owner" class="form-control" placeholder="Código de Dueño">
-                            <label for="name" class="placeholder-label">Código de Dueño</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-1">
-                    <button type="submit" name="create-local" id="create-local" class="form-control btn btn-create-local"><i class="fa-solid fa-hammer"></i></button>
-                </div>
-            </form>
-        </div>
-    <?php
     mysqli_close($connection);
-    }
     ?>
 
     <!-- Script de Bootstrap -->
