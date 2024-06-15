@@ -16,42 +16,74 @@
 <body>
     <?php include('navbar.php');
     include('db_connection.php');
-    
+    extract($_GET);
+
+    $query = "SELECT * FROM rubros_local";
+    $result = mysqli_query($connection, $query);
+    while($row = mysqli_fetch_assoc($result)) {
+        $rubros[$row['codRubro']] = $row['nombreRubro'];
+    }
+    mysqli_free_result($result);
 
     # Verifica si se encuentra la id de algún local en la URL
-    if(isset($_GET['id'])) { # Si la encuentra
-        $query = "SELECT * FROM locales l WHERE l.codLocal='" . $_GET['id'] . "'";
+    if(isset($id)) { # Si la encuentra
+        $query = "SELECT * FROM locales l WHERE l.codLocal='$id'";
         $result = mysqli_query($connection, $query);
         $local = mysqli_fetch_array($result);
         ?>
-        <p>
-            <?= $local['nombreLocal']; ?> <br>
-            <?= $local['ubicacionLocal']; ?> <br>
-            <?= $local['rubroLocal']; ?>
-        </p>
+        <div class="single-card-container row g-4">
+            <div class="col">
+                <div class="card m-1">
+                    <div class="card-header" style="text-align: center;">
+                        <img src="images/logo.png" class="img-fluid rounded-top" style="max-width:200px; margin:0 auto;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $local['nombreLocal']; ?></h5>
+                        <p class="card-text m-0"><small><i>
+                            <?= $rubros[$local['rubroLocal']]; ?>
+                        </i></small></p>
+                        <p class="card-text mb-2"><small><i>
+                            <?= $local['ubicacionLocal']; ?> - Local <?= $local['codLocal']; ?>
+                        </i></small></p>
+                        <a href="locales.php?<?= SID; ?>&id=<?= $id; ?>" class="btn btn-primary btn-sm"><i class="fa-solid fa-tags"></i> Promociones</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <?php
+        mysqli_free_result($result);
     } else { # Sino
-        if(isset($_GET['category'])){
-            $query = "SELECT * FROM locales l WHERE l.rubroLocal='" . $_GET['category'] . "'";
-        } else {
-            $query = "SELECT * FROM locales";
+        if(!isset($order)) {
+            $order = "ASC";
         }
+
+        if(isset($category)){
+            $query = "SELECT * FROM locales l WHERE l.rubroLocal='$category' ORDER BY nombreLocal $order";
+        } else {
+            $query = "SELECT * FROM locales ORDER BY nombreLocal $order";
+        }
+        
         $result = mysqli_query($connection, $query);
-        ?> <div class="abc row row-cols-1 row-cols-lg-2 row-cols-xxl-3 g-4"> <?php
+        ?> <div class="card-container row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4"> <?php
         while($row = mysqli_fetch_assoc($result)) { ?>
             <div class="col">
                 <div class="card m-1">
+                    <img src="images/logo.png" class="img-fluid rounded-top">
                     <div class="card-body">
                         <h5 class="card-title"><?= $row['nombreLocal']; ?></h5>
-                        <a href="locales.php?<?= SID; ?>&id=<?= $row['codLocal']; ?>" class="btn btn-primary">Info del local</a>
-                        <a href="locales.php?<?= SID; ?>&id=<?= $row['codLocal']; ?>" class="btn btn-primary"><i class="fa-solid fa-tags"></i> Promociones</a>
+                        <p>
+                            <?= $rubros[$row['rubroLocal']]; ?> <br>
+                            <?= $row['ubicacionLocal']; ?> <br>
+                        </p>
+                        <a href="locales.php?<?= SID; ?>&id=<?= $row['codLocal']; ?>" class="btn btn-primary btn-sm">Más info</a>
+                        <a href="locales.php?<?= SID; ?>&id=<?= $row['codLocal']; ?>" class="btn btn-primary btn-sm"><i class="fa-solid fa-tags"></i></a>
                     </div>
                 </div>
             </div>
         <?php }
         ?> </div> <?php
+        mysqli_free_result($result);
     }
-    mysqli_free_result($result);
 
     # Verifica si el usuario está loggeado y es administrador
     if(isset($_SESSION['userType']) && $_SESSION['userType'] == 1) {
@@ -69,9 +101,10 @@
                             <label for="name" class="placeholder-label">Nombre del Local</label>
                         </div>
                         <select name="ubi" id="ubi" class="form-select">
-                            <option>Nivel 1</option>
-                            <option>Nivel 2</option>
-                            <option>Nivel 3</option>
+                            <option>Planta baja</option>
+                            <option>Piso 1</option>
+                            <option>Piso 2</option>
+                            <option>Piso 3</option>
                         </select>
                         <select name="category" id="category" class="form-select">
                             <?php

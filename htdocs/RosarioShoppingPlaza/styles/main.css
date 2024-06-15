@@ -10,46 +10,44 @@ body {
     background-color: rgb(255, 249, 238);
 }
 
-nav{
+nav {
     background-color: var(--primary);
 }
 
-.nav_item{
+.nav_item {
     text-decoration: none;
     color: var(--text);
 }
 
-.nav_item:hover{
+.nav_item:hover {
     color: var(--secondary);
 }
 
-#searchbar{
+#searchbar {
     color: var(--primary);
 }
-
 
 @media screen and (min-width: 1346px) {
     #searchbar {width: 398px;}
     
 }
 
-
 @media screen and (max-width: 1160px) {
     #searchbar {width: 100%;}
     
 }
 
-#searchbar::placeholder{
+#searchbar::placeholder {
     color:var(--white);
 }
 
-.navbar-btn{
+.navbar-btn {
     color:var(--text);
     background-color: var(--secondary);
     
 }
 
-.navbar-btn-outline{
+.navbar-btn-outline {
     color: #eb6060;
     background-color: transparent;
     border: 1px solid #eb6060;  
@@ -64,7 +62,6 @@ nav{
     color: var(--text);
     background-color: #f35454;
 }
-
 
 .navbar-login {
     width: 120px;
@@ -145,7 +142,17 @@ nav{
     color: rgb(180, 196, 240);
 }
 
-.abc {
+.card-container {
+    margin: 0 auto;
+    width: 75%;
+}
+
+.single-card-container {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.filter-container {
     margin: 0 auto;
     width: 75%;
 }
