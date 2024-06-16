@@ -105,6 +105,13 @@ body {
     margin-bottom: 8px;
 }
 
+.form-contact {
+    margin: auto;
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 8px;
+}
+
 .form-container {
     color: white;
     background-color: var(--primary);

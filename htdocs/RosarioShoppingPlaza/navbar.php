@@ -20,9 +20,6 @@
                     <a class="nav-link nav_item" href="servicios.php">Servicios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav_item" href="contacto.php">Contactanos</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link nav_item" href="locales.php">Locales</a>
                 </li>
                 <li class="nav-item">
