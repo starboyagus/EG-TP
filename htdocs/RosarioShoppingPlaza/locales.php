@@ -16,8 +16,8 @@
 <body>
     <?php include('navbar.php');
 
-    $tools = 'locales';
-    include('admin_tools.php');
+    $tools = 'admin_locales';
+    include('tools.php');
     unset($tools);
 
     include('db_connection.php');
@@ -36,26 +36,38 @@
         $result = mysqli_query($connection, $query);
         $local = mysqli_fetch_array($result);
         ?>
-        <div class="single-card-container row g-4">
-            <div class="col">
-                <div class="card m-1">
-                    <div class="card-header" style="text-align: center;">
-                        <img src="images/logo.png" class="img-fluid rounded-top" style="max-width:200px; margin:0 auto;">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title"><?= $local['nombreLocal']; ?></h5>
-                        <p class="card-text m-0"><small><i>
-                            <?= $rubros[$local['rubroLocal']]; ?>
-                        </i></small></p>
-                        <p class="card-text mb-2"><small><i>
-                            <?= $local['ubicacionLocal']; ?> - Local <?= $local['codLocal']; ?>
-                        </i></small></p>
-                        <a href="locales.php?<?= SID; ?>&id=<?= $id; ?>" class="btn btn-primary btn-sm"><i class="fa-solid fa-tags"></i> Promociones</a>
+        <br>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col">
+                    <div class="card m-1">
+                        <div class="card-header" style="text-align: center;">
+                            <img src="images/logo.png" class="img-fluid rounded-top" style="max-width:200px; margin:0 auto;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $local['nombreLocal']; ?></h5>
+                            <p class="card-text m-0"><small><i>
+                                <?= $rubros[$local['rubroLocal']]; ?>
+                            </i></small></p>
+                            <p class="card-text mb-2"><small><i>
+                                <?= $local['ubicacionLocal']; ?> - Local <?= $local['codLocal']; ?>
+                            </i></small></p>
+                            <a href="locales.php?<?= SID; ?>&id=<?= $id; ?>" class="btn btn-primary btn-sm"><i class="fa-solid fa-tags"></i> Promociones</a>
+                            <?php
+                            if (isset($_SESSION['userType']) && $_SESSION['userType'] == 1) {
+                                ?>
+                                    <a href="locales_baja.php?<?= SID; ?>&id=<?= $id; ?>" class="btn btn-danger btn-sm"><i class="fa-regular fa-trash-can"></i> Eliminar</a>
+                                    <a href="locales_modificacion.php?<?= SID; ?>&id=<?= $id; ?>" class="btn btn-local btn-sm"><i class="fa-regular fa-pen-to-square"></i> Modificar</a>
+                                <?php
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <?php
+        
         mysqli_free_result($result);
     } else { # Sino
         if(!isset($order)) {
@@ -90,8 +102,9 @@
         mysqli_free_result($result);
     }
     mysqli_close($connection);
-    
-    include('footer.php'); ?>
+    ?>
+    <br><br><br><br><br><br><br><br><br><br>
+    <?php include('footer.php'); ?>
 
     <!-- Script de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

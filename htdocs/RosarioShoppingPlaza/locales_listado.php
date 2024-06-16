@@ -22,8 +22,8 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
 <body>
     <?php include('navbar.php');
 
-    $tools = 'locales';
-    include('admin_tools.php');
+    $tools = 'admin_locales';
+    include('tools.php');
     unset($tools);
 
     include('db_connection.php');
@@ -86,9 +86,9 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
         <h1>Listado de Locales</h1>
         <table class="table table-striped table-hover align-middle mb-0">
             <thead>
-                <tr>
+                <tr class="align-middle">
                     <?php
-                    $ths = [1 => "Cod", "Nombre", "Ubicación", "Rubro", "Diseño"];
+                    $ths = [1 => "Codigo", "Nombre", "Ubicación", "Rubro", "Dueño"];
                     foreach ($ths as $key => $value) {
                     ?>
                         <!-- Encabezado $ths[$key] con filtro -->
@@ -97,20 +97,20 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
                                 if ($order == "asc") {
                                     ?>
                                     <a href="locales_listado.php?<?= SID ?>page=<?= $page; ?>&n=<?= $num_per_page; ?>&order=<?= "desc"; ?>&by=<?= $key; ?>">
-                                        <i class="fa-solid fa-sort-up" style="color:black;"></i>
+                                    <small><i class="fa-solid fa-sort-up" style="color:black;"></i></small>
                                     </a>
                                     <?php
                                 } else {
                                     ?>
                                     <a href="locales_listado.php?<?= SID ?>page=<?= $page; ?>&n=<?= $num_per_page; ?>&order=<?= "asc"; ?>&by=0">
-                                        <i class="fa-solid fa-sort-down" style="color:black;"></i>
+                                    <small><i class="fa-solid fa-sort-down" style="color:black;"></i></small>
                                     </a>
                                     <?php
                                 }
                             } else {
                                 ?>
                                 <a href="locales_listado.php?<?= SID ?>page=<?= $page; ?>&n=<?= $num_per_page; ?>&order=<?= "asc"; ?>&by=<?= $key; ?>">
-                                        <i class="fa-solid fa-sort" style="color:black;"></i>
+                                        <small><i class="fa-solid fa-sort" style="color:black;"></i></small>
                                     </a>
                             <?php }
                             ?>

@@ -126,13 +126,13 @@ body {
     height: 100%;
     color: white;
     background-color: #2AA771;
-    border: 1px solid #227C55
+    border: 1px solid #2AA771
 }
 
 .btn-local:hover {
     height: 100%;
     color: white;
-    background-color: #59D59F;
+    background-color: #108452;
     border: 1px solid #108452;
 }
 
@@ -159,6 +159,15 @@ body {
     color: rgb(180, 196, 240);
 }
 
+.a-expand {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.a-expand:hover {
+    color: #7b8ea5;
+}
+
 /* Links */
 /* Cards */
 
@@ -173,6 +182,26 @@ body {
 }
 
 /* Cards */
+/* Badged*/
+
+.badge-inicial {
+    background-color: #5ab18d;
+}
+
+.badge-medium {
+    background-color: #5381c2;
+}
+
+.badge-premium {
+    background-color: #f7ba4a;
+}
+
+.badge-text {
+    color: var(--text);
+    text-decoration: none;
+}
+
+/* Badged*/
 /* Admin Tools */
 
 .admin-tools {

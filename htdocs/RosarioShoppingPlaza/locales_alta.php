@@ -23,8 +23,8 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
     <?php
     include('navbar.php');
 
-    $tools = 'locales';
-    include('admin_tools.php');
+    $tools = 'admin_locales';
+    include('tools.php');
     unset($tools);
 
     include('db_connection.php');
