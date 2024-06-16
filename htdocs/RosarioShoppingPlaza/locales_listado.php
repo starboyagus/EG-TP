@@ -40,39 +40,84 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
         $owners[$row['codUsuario']] = $row['nombreUsuario']; # Creamos un array con todos los dueños
     }
 
-    $num_per_page = 10; # Cantidad de locales que se mostrarán por página
-    $page = isset( $_GET['page']) ? $_GET['page'] : null; # Página en la que me encuentro
+    $num_per_page = isset($_GET['n']) ? $_GET['n'] : 10; # Cantidad de locales que se mostrarán por página
+    $num_per_page = match ($num_per_page) {
+        '10', '25', '50', '100' => (int)$num_per_page,   # Si la cantidad que se mostrará por página es alguna de estas, está todo correcto
+        default => 10                       # Si es un número distinto, es incorrecto y se toma por defecto 10
+    };
+
+    $page = isset($_GET['page']) ? $_GET['page'] : null; # Página en la que me encuentro
     if (!$page) {
         $start = 0; # Primer local a mostrar
         $page = 1;  # Página en la que me encuentro
     }
     else {
         $start = ($page - 1) * $num_per_page; # Primer local a mostrar
-    } 
+    }
+
+    $by = isset($_GET['by']) ? $_GET['by'] : 0; # Campo por el que se ordenará la lista
+    $order = isset($_GET['order']) ? $_GET['order'] : "asc"; # Criterio de orden
+    $by_col = match ($by) {
+        '1' => "codLocal",
+        '2' => "nombreLocal",
+        '3' => "ubicacionLocal",
+        '4' => "rubroLocal",
+        '5' => "codUsuario",
+        default => null
+    };
 
     $query = "SELECT * FROM locales";
     $result = mysqli_query($connection, $query);
     $num_registers = mysqli_num_rows($result); # Cantidad de locales en la base de datos
     $num_pages = ceil($num_registers / $num_per_page); # Cantidad de páginas
 
-    $query = "SELECT * FROM locales LIMIT $start , $num_per_page";
+    if ($by_col) {
+        $query = "SELECT * FROM locales ORDER BY $by_col $order LIMIT $start , $num_per_page";
+    } else {
+        $query = "SELECT * FROM locales LIMIT $start , $num_per_page";
+    }
     $result = mysqli_query($connection, $query);
     $num_rows = mysqli_num_rows($result); # Cantidad de locales para mostrar en la página actual
-    
     
     ?>
     <br>
 
-    <h1>Listado de Locales</h1>
     <div class="container table-container">
+        <h1>Listado de Locales</h1>
         <table class="table table-striped table-hover align-middle mb-0">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center">Cod</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Ubicación</th>
-                    <th scope="col">Rubro</th>
-                    <th scope="col">Dueño</th>
+                    <?php
+                    $ths = [1 => "Cod", "Nombre", "Ubicación", "Rubro", "Diseño"];
+                    foreach ($ths as $key => $value) {
+                    ?>
+                        <!-- Encabezado $ths[$key] con filtro -->
+                        <th scope="col" class="text-center"> <?= $value; 
+                            if ($by == $key) {
+                                if ($order == "asc") {
+                                    ?>
+                                    <a href="locales_listado.php?<?= SID ?>page=<?= $page; ?>&n=<?= $num_per_page; ?>&order=<?= "desc"; ?>&by=<?= $key; ?>">
+                                        <i class="fa-solid fa-sort-up" style="color:black;"></i>
+                                    </a>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <a href="locales_listado.php?<?= SID ?>page=<?= $page; ?>&n=<?= $num_per_page; ?>&order=<?= "asc"; ?>&by=0">
+                                        <i class="fa-solid fa-sort-down" style="color:black;"></i>
+                                    </a>
+                                    <?php
+                                }
+                            } else {
+                                ?>
+                                <a href="locales_listado.php?<?= SID ?>page=<?= $page; ?>&n=<?= $num_per_page; ?>&order=<?= "asc"; ?>&by=<?= $key; ?>">
+                                        <i class="fa-solid fa-sort" style="color:black;"></i>
+                                    </a>
+                            <?php }
+                            ?>
+                        </th>
+                    <?php
+                    }
+                    ?>
                     <th scope="col" class="text-center">Modificar</th>
                     <th scope="col" class="text-center">Eliminar</th>
                 </tr>
@@ -103,17 +148,26 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
                 ?>
             </tbody>
         </table>
-        <p class="text-end"><small>Mostrando <?= $start + 1 . "-" . $start + $num_rows . " de " . $num_registers; ?></small></p>
+        <div class="row">
+            <p class="col text-start">
+                Ver:
+                <a href="locales_listado.php?<?= SID ?>page=1&n=10&order=<?= $order; ?>&by=<?= $by; ?>" class="a-link">10</a>
+                <a href="locales_listado.php?<?= SID ?>page=1&n=25&order=<?= $order; ?>&by=<?= $by; ?>" class="a-link">25</a>
+                <a href="locales_listado.php?<?= SID ?>page=1&n=50&order=<?= $order; ?>&by=<?= $by; ?>" class="a-link">50</a>
+                <a href="locales_listado.php?<?= SID ?>page=1&n=100&order=<?= $order; ?>&by=<?= $by; ?>" class="a-link">100</a>
+            </p>
+            <p class="col text-end"><small>Mostrando <?= $start + 1 . "-" . $start + $num_rows . " de " . $num_registers; ?></small></p>
+        </div>
         <nav>
             <ul class="pagination pagination-sm justify-content-center">
                 <!-- Ir a la primer página -->
                 <li class="page-item">
-                    <a href="locales_listado.php?<?= SID ?>page=1" class="page-link <?= $page == 1 ? 'disabled' : ''?>"><i class="fa-solid fa-angles-left"></i></a>
+                    <a href="locales_listado.php?<?= SID ?>page=1&n=<?= $num_per_page; ?>&order=<?= $order; ?>&by=<?= $by; ?>" class="page-link <?= $page == 1 ? 'disabled' : ''?>"><i class="fa-solid fa-angles-left"></i></a>
                 </li>
 
                 <!-- Ir a la página anterior -->
                 <li class="page-item">
-                    <a href="locales_listado.php?<?= SID ?>page=<?= $page-1 ?>" class="page-link <?= $page == 1 ? 'disabled' : ''?>"><i class="fa-solid fa-angle-left"></i></a>
+                    <a href="locales_listado.php?<?= SID ?>page=<?= $page-1 ?>&n=<?= $num_per_page; ?>&order=<?= $order; ?>&by=<?= $by; ?>" class="page-link <?= $page == 1 ? 'disabled' : ''?>"><i class="fa-solid fa-angle-left"></i></a>
                 </li>
                 
                 <!-- Ir a la página $i -->
@@ -121,7 +175,7 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
                 for($i = 1; $i <= $num_pages; $i++) {
                         ?>
                         <li class="page-item">
-                            <a href="locales_listado.php?<?= SID ?>page=<?= $i ?>" class="page-link <?= $page == $i ? 'active' : ''?>"><?= $i ?></a>
+                            <a href="locales_listado.php?<?= SID ?>page=<?= $i ?>&n=<?= $num_per_page; ?>&order=<?= $order; ?>&by=<?= $by; ?>" class="page-link <?= $page == $i ? 'active' : ''?>"><?= $i ?></a>
                         </li>
                         <?php
                     }
@@ -129,12 +183,12 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
 
                 <!-- Ir a la página siguiente -->
                 <li class="page-item">
-                    <a href="locales_listado.php?<?= SID ?>page=<?= $page+1 ?>" class="page-link <?= $page == $num_pages ? 'disabled' : ''?>"><i class="fa-solid fa-angle-right"></i></a>
+                    <a href="locales_listado.php?<?= SID ?>page=<?= $page+1 ?>&n=<?= $num_per_page; ?>&order=<?= $order; ?>&by=<?= $by; ?>" class="page-link <?= $page == $num_pages ? 'disabled' : ''?>"><i class="fa-solid fa-angle-right"></i></a>
                 </li>
 
                 <!-- Ir a la última página -->
                 <li class="page-item">
-                    <a href="locales_listado.php?<?= SID ?>page=<?= $num_pages ?>" class="page-link <?= $page == $num_pages ? 'disabled' : ''?>"><i class="fa-solid fa-angles-right"></i></a>
+                    <a href="locales_listado.php?<?= SID ?>page=<?= $num_pages ?>&n=<?= $num_per_page; ?>&order=<?= $order; ?>&by=<?= $by; ?>" class="page-link <?= $page == $num_pages ? 'disabled' : ''?>"><i class="fa-solid fa-angles-right"></i></a>
                 </li>
             </ul>
         </nav>

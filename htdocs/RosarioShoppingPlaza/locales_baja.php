@@ -49,7 +49,7 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
             ?>
 
             <br>
-            <h1 class="form-header">Modificar Local</h1>
+            <h1 class="form-header">Eliminar Local</h1>
             <div class="container form-container" style="max-width:70em;">
                 <!-- Formulario -->
                 <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="POST" class="row g-3">
@@ -85,7 +85,7 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
                         
                     <!-- Boton Submit-->
                     <div class="col-12">
-                        <button type="submit" name="delete-local" id="update-local" class="form-control btn btn-danger"><i class="fa-regular fa-trash-can"></i> Eliminar Local</button>
+                        <button type="submit" name="delete-local" id="delete-local" class="form-control btn btn-danger"><i class="fa-regular fa-trash-can"></i> Eliminar Local</button>
                     </div>
                 </form>
             </div>
