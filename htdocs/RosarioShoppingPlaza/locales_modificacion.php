@@ -38,72 +38,8 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
         if($local = $result->fetch_array()) {
             $search = false;
             $result = mysqli_query($connection, "SELECT * FROM rubros_local");
-
-            if(isset($_GET['error'])) {
-                ?>
-                <div class="alert alert-danger" role="alert">
-                    El código de usuario "<?= $_GET['error']; ?>" no existe o no pertenece a un dueño
-                </div>
-                <?php
-            }
-            ?>
-
-            <br>
-            <h1 class="form-header">Modificar Local</h1>
-            <div class="container form-container" style="max-width:70em;">
-                <!-- Formulario -->
-                <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="POST" class="row g-3">
-                    <!-- Campo Código de Local -->
-                    <div class="col-12 col-sm-6 col-md-3 col-lg-2">
-                        <label for="local_id" class="form-label">Código de Local</label>
-                        <input type="number" name="local_id" id="local_id" class="form-control" placeholder="Nombre del Local" min="0" value="<?= $local_id; ?>" readonly>
-                    </div>
-
-                    <!-- Campo Codigo Dueño -->
-                    <div class="col-12 col-sm-6 col-md-3 col-lg-2">
-                        <label for="owner" class="form-label">Código de Dueño</label>
-                        <input type="number" name="owner" id="owner" class="form-control" placeholder="Código de Dueño" min="0" value="<?= $local['codUsuario']; ?>" required>
-                    </div>
-
-                    <!-- Campo Nombre Local -->
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <label for="local_name" class="form-label">Nombre del Local</label>
-                        <input type="text" name="local_name" id="local_name" class="form-control" placeholder="Nombre del Local" value="<?= $local['nombreLocal']; ?>" required>
-                    </div>
-
-                    <!-- Campo Ubicación -->
-                    <div class="col-12 col-md-6 col-lg-2">
-                        <label for="local_ubi" class="form-label">Ubicación</label>
-                        <select name="local_ubi" id="local_ubi" class="form-select">
-                            <option <?= $local['ubicacionLocal'] == "Planta baja" ? "selected" : ""; ?>>Planta baja</option>
-                            <option <?= $local['ubicacionLocal'] == "Piso 1" ? "selected" : ""; ?>>Piso 1</option>
-                            <option <?= $local['ubicacionLocal'] == "Piso 2" ? "selected" : ""; ?>>Piso 2</option>
-                            <option <?= $local['ubicacionLocal'] == "Piso 3" ? "selected" : ""; ?>>Piso 3</option>
-                        </select>
-                    </div>
-
-                    <!-- Campo Rubro -->
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <label for="category" class="form-label">Rubro</label>
-                        <select name="category" id="category" class="form-select">
-                            <?php
-                            while($row = mysqli_fetch_assoc($result)) { 
-                                ?>
-                                <option value="<?= $row['codRubro']; ?>" <?= $row['codRubro'] == $local['rubroLocal'] ? "selected" : ""; ?>><?= $row['nombreRubro']; ?></option>
-                                <?php
-                            }
-                            ?>
-                        </select>
-                    </div>
-                        
-                    <!-- Boton Submit-->
-                    <div class="col-12">
-                        <button type="submit" name="update-local" id="update-local" class="form-control btn btn-local"><i class="fa-regular fa-pen-to-square"></i> Modificar Local</button>
-                    </div>
-                </form>
-            </div>
-            <?php
         } else {
+            mysqli_free_result($result);
             ?>
             <div class="alert alert-warning" role="alert">
                 No existe un local con el id "<?= $_GET['id']?>"
@@ -115,15 +51,28 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
         $query = "SELECT * FROM usuarios u WHERE u.codUsuario='$owner' AND u.tipoUsuario=2";
         $result = mysqli_query($connection, $query);
         if ($result->fetch_array()) {
+            mysqli_free_result($result);
             $query = "UPDATE locales SET nombreLocal='$local_name', ubicacionLocal='$local_ubi', rubroLocal='$category', codUsuario='$owner' WHERE codLocal='$local_id'";
-            $result = mysqli_query($connection, $query);
+            mysqli_query($connection, $query);
             ?>
             <div class="alert alert-success" role="alert">
                 El local "<?= $local_id; ?>" se ha modificado correctamente
             </div>
             <?php
         } else {
-            header("Location: locales_modificacion.php?id=$local_id&error=$owner");
+            $search = false;
+            $local = [
+                'nombreLocal' => $local_name,
+                'ubicacionLocal' => $local_ubi,
+                'rubroLocal' => $category,
+                'codUsuario' => $owner
+            ];
+            $result = mysqli_query($connection, "SELECT * FROM rubros_local");
+            ?>
+            <div class="alert alert-danger" role="alert">
+                El código de usuario "<?= $owner; ?>" no existe o no pertenece a un dueño
+            </div>
+            <?php
         }
         
     }
@@ -149,7 +98,68 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
         </form>
     </div>
 
-    <?php } ?>
+    <?php } else { ?>
+
+        <br>
+        <h1 class="form-header">Modificar Local</h1>
+        <div class="container form-container" style="max-width:70em;">
+            <!-- Formulario -->
+            <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="POST" class="row g-3">
+                <!-- Campo Código de Local -->
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+                    <label for="local_id" class="form-label">Código de Local</label>
+                    <input type="number" name="local_id" id="local_id" class="form-control" placeholder="Nombre del Local" min="0" value="<?= $local_id; ?>" readonly>
+                </div>
+                
+                <!-- Campo Codigo Dueño -->
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+                    <label for="owner" class="form-label">Código de Dueño</label>
+                    <input type="number" name="owner" id="owner" class="form-control" placeholder="Código de Dueño" min="0" value="<?= $local['codUsuario']; ?>" required>
+                </div>
+                
+                <!-- Campo Nombre Local -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <label for="local_name" class="form-label">Nombre del Local</label>
+                    <input type="text" name="local_name" id="local_name" class="form-control" placeholder="Nombre del Local" value="<?= $local['nombreLocal']; ?>" required>
+                </div>
+                
+                <!-- Campo Ubicación -->
+                <div class="col-12 col-md-6 col-lg-2">
+                    <label for="local_ubi" class="form-label">Ubicación</label>
+                    <select name="local_ubi" id="local_ubi" class="form-select">
+                        <option <?= $local['ubicacionLocal'] == "Planta baja" ? "selected" : ""; ?>>Planta baja</option>
+                        <option <?= $local['ubicacionLocal'] == "Piso 1" ? "selected" : ""; ?>>Piso 1</option>
+                        <option <?= $local['ubicacionLocal'] == "Piso 2" ? "selected" : ""; ?>>Piso 2</option>
+                        <option <?= $local['ubicacionLocal'] == "Piso 3" ? "selected" : ""; ?>>Piso 3</option>
+                    </select>
+                </div>
+                
+                <!-- Campo Rubro -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <label for="category" class="form-label">Rubro</label>
+                    <select name="category" id="category" class="form-select">
+                        <?php
+                        while($row = mysqli_fetch_assoc($result)) { 
+                            ?>
+                            <option value="<?= $row['codRubro']; ?>" <?= $row['codRubro'] == $local['rubroLocal'] ? "selected" : ""; ?>><?= $row['nombreRubro']; ?></option>
+                            <?php
+                        }
+                        mysqli_free_result($result);
+                        ?>
+                    </select>
+                </div>
+                    
+                <!-- Boton Submit-->
+                <div class="col-12">
+                    <button type="submit" name="update-local" id="update-local" class="form-control btn btn-local"><i class="fa-regular fa-pen-to-square"></i> Modificar Local</button>
+                </div>
+            </form>
+        </div>
+
+    <?php
+    } 
+    mysqli_close($connection);
+    ?>
     
     <br><br><br><br><br><br><br><br><br><br>
     
