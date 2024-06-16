@@ -1,4 +1,6 @@
 <footer class="footer mt-4 text-center text-lg-start footer-text">
+
+    <!-- Seccion Redes Sociales -->
     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
         <div class="me-5 d-none d-lg-block">
             <span>Conectate con nosotros en las redes sociales:</span>
@@ -19,9 +21,12 @@
         </div>
     </section>
 
+    <!-- Section main del footer -->
     <section class="">
         <div class="container text-center text-md-start mt-5">
             <div class="row mt-3">
+
+                <!-- Descripcion del shopping -->
                 <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
                     <h6 class="text-uppecase fw-bold mb-4 footer-text">
                         <i class="fa-solid fa-city me-3"></i> Rosario Shopping Plaza
@@ -30,6 +35,8 @@
                         Informacion del local bla bla bla bla bla bla bla
                     </p>
                 </div>
+
+                <!-- About -->
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4 footer-text">
                         About
@@ -45,6 +52,7 @@
                     </p>
                 </div>
 
+                <!-- Links del shopping -->
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4 footer-text">
                         Useful Links
@@ -56,16 +64,17 @@
                         <a href="#" class="footer-item">Servicios</a>
                     </p>
                     <p class="footer-text">
-                        <a href="#" class="footer-item">Contacto</a>
+                        <a href="contacto.php" class="footer-item">Contacto</a>
                     </p>
                     <p class="footer-text">
-                        <a href="#" class="footer-item">Locales</a>
+                        <a href="locales.php" class="footer-item">Locales</a>
                     </p>
                     <p class="footer-text">
                         <a href="#" class="footer-item">Promociones</a>
                     </p>
                 </div>
 
+                <!-- Informacion clave del Shopping -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <h6 class="text-uppercase fw-bold mb-4 footer-text">Contacto</h6>
                     <p class="footer-text"><i class="fa-solid fa-location-dot me-3"></i>Ubicacion del Shopping</p>
@@ -76,6 +85,7 @@
         </div>
     </section>
 
+    <!-- Copyright -->
     <div class="text-center footer-text p-3" style="background-color: #26303b">
         © 2024 Copyright:
         <a class="footer-text footer-item fw-bold" href="#">Rosario Shopping Plaza</a>
