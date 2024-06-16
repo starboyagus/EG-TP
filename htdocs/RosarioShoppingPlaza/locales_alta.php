@@ -48,36 +48,34 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
         } else {
             ?>
             <div class="alert alert-danger" role="alert">
-                No se ha encontrado un dueño con ese código
-            </div>
+                    El código de usuario "<?= $owner; ?>" no existe o no pertenece a un dueño
+                </div>
             <?php
         }
         mysqli_free_result($result);
-    
-        
     }
 
     $result = mysqli_query($connection, "SELECT * FROM rubros_local");
     ?>
     <br>
     <h1 class="form-header">Crear Local</h1>
-    <div class="container form-container" style="max-width:40em;">
+    <div class="container form-container" style="max-width:70em;">
         <!-- Formulario -->
         <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="POST" class="row g-3">
-            <!-- Campo Nombre Local -->
-            <div class="col-6">
-                <label for="local_name" class="form-label">Nombre del Local</label>
-                <input type="text" name="local_name" id="local_name" class="form-control" placeholder="Nombre del Local">
+            <!-- Campo Codigo Dueño -->
+            <div class="col-12 col-sm-6 col-lg-3">
+                <label for="owner" class="form-label">Código de Dueño</label>
+                <input type="number" name="owner" id="owner" class="form-control" placeholder="Código de Dueño" min="0" required>
             </div>
             
-            <!-- Campo Codigo Dueño -->
-            <div class="col-6">
-                <label for="owner" class="form-label">Código de Dueño</label>
-                <input type="number" name="owner" id="owner" class="form-control" placeholder="Código de Dueño" min="0">
+            <!-- Campo Nombre Local -->
+            <div class="col-12 col-sm-6 col-lg-3">
+                <label for="local_name" class="form-label">Nombre del Local</label>
+                <input type="text" name="local_name" id="local_name" class="form-control" placeholder="Nombre del Local" required>
             </div>
 
             <!-- Campo Ubicación -->
-            <div class="col-6">
+            <div class="col-12 col-sm-6 col-lg-3">
                 <label for="local_ubi" class="form-label">Ubicación</label>
                 <select name="local_ubi" id="local_ubi" class="form-select">
                     <option>Planta baja</option>
@@ -88,7 +86,7 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
             </div>
 
             <!-- Campo Rubro -->
-            <div class="col-6">
+            <div class="col-12 col-sm-6 col-lg-3">
                 <label for="category" class="form-label">Rubro</label>
                 <select name="category" id="category" class="form-select">
                     <?php
@@ -103,13 +101,15 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
 
             <!-- Boton Submit-->
             <div class="col-12">
-                <button type="submit" name="create-local" id="create-local" class="form-control btn btn-create-local"><i class="fa-solid fa-hammer"></i> Crear Local <i class="fa-solid fa-hammer"></i></button>
+                <button type="submit" name="create-local" id="create-local" class="form-control btn btn-local"><i class="fa-solid fa-plus"></i> Crear Local</button>
             </div>
         </form>
     </div>
     <br><br><br><br><br><br><br><br><br><br>
-    <?php
-    include('footer.php');
-    ?>
+    
+    <?php include('footer.php'); ?>
+
+    <!-- Script de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

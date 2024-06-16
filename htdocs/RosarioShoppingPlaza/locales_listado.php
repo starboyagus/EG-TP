@@ -52,8 +52,8 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
 
     $query = "SELECT * FROM locales";
     $result = mysqli_query($connection, $query);
-    $num_rows = mysqli_num_rows($result); # Cantidad de locales en la base de datos
-    $num_pages = ceil($num_rows / $num_per_page); # Cantidad de páginas
+    $num_registers = mysqli_num_rows($result); # Cantidad de locales en la base de datos
+    $num_pages = ceil($num_registers / $num_per_page); # Cantidad de páginas
 
     $query = "SELECT * FROM locales LIMIT $start , $num_per_page";
     $result = mysqli_query($connection, $query);
@@ -65,36 +65,36 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
 
     <h1>Listado de Locales</h1>
     <div class="container table-container">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover align-middle mb-0">
             <thead>
                 <tr>
-                    <th scope="col">Cod</th>
+                    <th scope="col" class="text-center">Cod</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Ubicación</th>
                     <th scope="col">Rubro</th>
                     <th scope="col">Dueño</th>
-                    <th scope="col">Modificar</th>
-                    <th scope="col">Eliminar</th>
+                    <th scope="col" class="text-center">Modificar</th>
+                    <th scope="col" class="text-center">Eliminar</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 <?php
                     while($row = mysqli_fetch_array($result)) {
                     ?>
                     <tr>
-                        <th scope="row"><?= $row['codLocal']; ?></th>
+                        <th scope="row" class="text-center"><?= $row['codLocal']; ?></th>
                         <td><?= $row['nombreLocal']; ?></td>
                         <td><?= $row['ubicacionLocal']; ?></td>
                         <td><?= $categories[$row['rubroLocal']]; ?></td>
                         <td><?= $owners[$row['codUsuario']]; ?></td>
-                        <td>
-                            <a href="locales_modificacion.php?<?= SID ?>local=<?= $row['codLocal']; ?>" class="btn btn-primary">
+                        <td class="text-center" width="90px">
+                            <a href="locales_modificacion.php?<?= SID ?>id=<?= $row['codLocal']; ?>" class="btn btn-primary btn-sm">
                                 <i class="fa-regular fa-pen-to-square"></i>
                             </a>
                         </td>
-                        <td>
-                            <a href="locales_baja.php?<?= SID ?>local=<?= $row['codLocal']; ?>" class="btn btn-danger">
-                                <i class="fa-regular fa-trash-can"></i>
+                        <td class="text-center" width="90px">
+                            <a href="locales_baja.php?<?= SID ?>id=<?= $row['codLocal']; ?>" class="btn btn-danger btn-sm">
+                                <i class="fa-regular fa-trash-can"></i>    
                             </a>
                         </td>
                     </tr>
@@ -103,9 +103,9 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
                 ?>
             </tbody>
         </table>
-        <br>
+        <p class="text-end"><small>Mostrando <?= $start + 1 . "-" . $start + $num_rows . " de " . $num_registers; ?></small></p>
         <nav>
-            <ul class="pagination">
+            <ul class="pagination pagination-sm justify-content-center">
                 <!-- Ir a la primer página -->
                 <li class="page-item">
                     <a href="locales_listado.php?<?= SID ?>page=1" class="page-link <?= $page == 1 ? 'disabled' : ''?>"><i class="fa-solid fa-angles-left"></i></a>
@@ -121,7 +121,7 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
                 for($i = 1; $i <= $num_pages; $i++) {
                         ?>
                         <li class="page-item">
-                            <a href="locales_listado.php?<?= SID ?>page=<?= $i ?>" class="page-link <?= $page == $i ? 'disabled' : ''?>"><?= $i ?></a>
+                            <a href="locales_listado.php?<?= SID ?>page=<?= $i ?>" class="page-link <?= $page == $i ? 'active' : ''?>"><?= $i ?></a>
                         </li>
                         <?php
                     }
@@ -140,5 +140,8 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1) {
         </nav>
     </div>
     <?php include('footer.php'); ?>
+
+    <!-- Script de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

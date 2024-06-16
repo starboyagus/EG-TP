@@ -113,19 +113,23 @@ body {
     border-radius: 0.5em;
 }
 
-.placeholder-label, .input::placeholder {
-    color: rgb(120, 123, 126);
+.form-control::placeholder {
+    color: rgb(161, 165, 168);
     opacity: 1;
 }
 
-.btn-create-local, .btn-create-local:enabled {
+.form-textarea {
+    resize: none;
+}
+
+.btn-local, .btn-local:enabled {
     height: 100%;
     color: white;
     background-color: #2AA771;
     border: 1px solid #227C55
 }
 
-.btn-create-local:hover {
+.btn-local:hover {
     height: 100%;
     color: white;
     background-color: #59D59F;
@@ -210,7 +214,13 @@ body {
 /* Admin Tools */
 /* Tablas */
 
+.table {
+    border: 1px solid #b7bdc5;
+}
 
+.table-group-divider {
+    color: #9aa0a7;
+}
 
 /* Tablas */
 /* Paginación */

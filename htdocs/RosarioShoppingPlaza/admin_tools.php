@@ -10,7 +10,7 @@ if(isset($_SESSION['userType']) && $_SESSION['userType'] == 1) {
                 <a href="locales_baja.php" class="btn me-1 btn-tool btn-sm"><i class="fa-regular fa-trash-can"></i> Baja</a>
             </li>
             <li class="nav-item">
-                <a href="locales_menu_modificacion.php" class="btn me-1 btn-tool btn-sm"><i class="fa-regular fa-pen-to-square"></i> Modificación</a>
+                <a href="locales_modificacion.php" class="btn me-1 btn-tool btn-sm"><i class="fa-regular fa-pen-to-square"></i> Modificación</a>
             </li>
             <li class="nav-item">
                 <a href="locales_listado.php" class="btn me-1 btn-tool btn-sm"><i class="fa-solid fa-list-ul"></i> Listado</a>
