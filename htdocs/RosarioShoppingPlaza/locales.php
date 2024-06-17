@@ -41,8 +41,8 @@
             <div class="row g-4">
                 <div class="col">
                     <div class="card m-1">
-                        <div class="card-header" style="text-align: center;">
-                            <img src="images/logo.png" class="img-fluid rounded-top" style="max-width:200px; margin:0 auto;">
+                        <div class="card-header p-0" style="text-align: center;">
+                            <img src="images/logo.png" class="img-fluid rounded" style="max-width:200px; margin:0 auto;">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title"><?= $local['nombreLocal']; ?></h5>

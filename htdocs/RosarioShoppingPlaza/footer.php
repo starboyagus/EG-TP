@@ -79,13 +79,13 @@
                     <!-- Formulario -->
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="row g-3">
                         <!-- Campo Nombre -->
-                        <div class="col-6">
+                        <div class="col-12 col-sm-6">
                             <label for="f_name" class="form-label">Nombre</label>
                             <input type="text" name="f_name" id="f_name" class="form-control" placeholder="Nombre" required>
                         </div>
             
                         <!-- Campo Apellido -->
-                        <div class="col-6">
+                        <div class="col-12 col-sm-6">
                             <label for="l_name" class="form-label">Apellido</label>
                             <input type="text" name="l_name" id="l_name" class="form-control" placeholder="Apellido" required>
                         </div>

@@ -69,7 +69,7 @@
                         </div>
 
                         <!-- Separador -->
-                        <div class="text-center mt-3">
+                        <div class="text-center">
                             <a class="a-expand" data-bs-toggle="collapse" href="#card-text-<?= ++$i; ?>" role="button">
                                 Ver detalles
                             </a>
