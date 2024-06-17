@@ -60,3 +60,21 @@
         </div>
     </div>
 </nav>
+
+<ul class="nav justify-content-end admin-tools py-1">
+    <li class="nav-item">
+        <a href="change_view.php?type=1" class="btn mx-1 btn-tool btn-sm">Vista de Administrador</a>
+    </li>
+    <li class="nav-item">
+        <a href="change_view.php?type=2" class="btn mx-1 btn-tool btn-sm">Vista de Dueño</a>
+    </li>
+    <li class="nav-item">
+        <a href="change_view.php?type=3&cat=1" class="btn mx-1 btn-tool btn-sm">Vista de Cliente Inicial</a>
+    </li>
+    <li class="nav-item">
+        <a href="change_view.php?type=3&cat=2" class="btn mx-1 btn-tool btn-sm">Vista de Cliente Medium</a>
+    </li>
+    <li class="nav-item">
+        <a href="change_view.php?type=3&cat=3" class="btn mx-1 btn-tool btn-sm">Vista de Cliente Premium</a>
+    </li>
+</ul>
