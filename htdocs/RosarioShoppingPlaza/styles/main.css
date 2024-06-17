@@ -5,6 +5,19 @@
     --secondary: #5c7dd8;
     --secondary-dark: #405ca7;
     --white: #dedede;
+
+    /* Categorías */
+    --inicial: #5ab18d;
+    --inicial-hover: #3e8f6d;
+    --inicial-active: #34755a;
+
+    --medium: #5381c2;
+    --medium-hover: #3f6aa7;
+    --medium-active: #2d5896;
+
+    --premium: #f7ba4a;
+    --premium-hover: #ca942f;
+    --premium-active: #b1770d;
 }
 
 body {
@@ -154,6 +167,46 @@ body {
     background-color: var(--secondary-dark);
 }
 
+.btn-outline-inicial {
+    color: var(--inicial) !important;
+
+    &:hover {
+        color: var(--inicial-hover) !important;
+    }
+
+    &:active {
+        color: var(--inicial-active) !important;
+    }
+}
+
+.btn-outline-medium {
+    color: var(--medium) !important;
+
+    &:hover {
+        color: var(--medium-hover) !important;
+    }
+
+    &:active {
+        color: var(--medium-active) !important;
+    }
+}
+
+.btn-outline-premium {
+    color: var(--premium) !important;
+
+    &:hover {
+        color: var(--premium-hover) !important;
+    }
+
+    &:active {
+        color: var(--premium-active) !important;
+    }
+}
+
+.btn-check-dia {
+    color : var(--text) !important;
+}
+
 /* Formularios */
 /* Links */
 
@@ -192,15 +245,15 @@ body {
 /* Badged*/
 
 .badge-inicial {
-    background-color: #5ab18d;
+    background-color: var(--inicial);
 }
 
 .badge-medium {
-    background-color: #5381c2;
+    background-color: var(--medium);
 }
 
 .badge-premium {
-    background-color: #f7ba4a;
+    background-color: var(--premium);
 }
 
 .badge-text {

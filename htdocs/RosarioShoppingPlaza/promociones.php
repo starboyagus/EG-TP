@@ -20,34 +20,77 @@
     include('tools.php');
     unset($tools);
 
+    include('db_connection.php');
+
     ?>
 
     <div class="container">
         <div class="row g-4">
-            <div class="col col-12">
-                <div class="card mt-4">
-                  <div class="card-body">
-                    <h5 class="card-title">Nombre del Local</h5>
-                    <span class="badge badge-inicial"><a href="#" class="badge-text">Inicial</a></span>
-                    <span class="badge badge-medium"><a href="#" class="badge-text">Medium</a></span>
-                    <span class="badge badge-premium"><a href="#" class="badge-text">Premium</a></span>
-                    <br>
-                    <div class="text-center mt-3">
-                        <a class="a-expand" data-bs-toggle="collapse" href="#card-text" role="button">
-                            Ver detalles
-                        </a>
+            <?php
+            $query = "SELECT * FROM promociones";
+            $result = mysqli_query($connection, $query);
+            $i = 0;
+            while ($promo = mysqli_fetch_assoc($result)) {
+                $dayBits = str_split(str_pad(decbin($promo['diasSemana']), 7, "0", STR_PAD_LEFT));
+                $days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+                foreach ($dayBits as $key => $value) { 
+                    if($value == '0') {
+                        unset($days[$key]);
+                    }
+                }
+                ?>
+                <div class="col col-12">
+                    <div class="card mt-4">
+                      <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-6">
+                                <h5 class="card-title"><?= mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM locales l WHERE l.codLocal='" . $promo['codLocal'] . "'"))['nombreLocal']; ?></h5>
+                            </div>
+                            <div class="col-12 col-sm-6 text-sm-end">
+                                <?php
+                                switch($promo['categoriaCliente']) {
+                                    case '1':
+                                        ?>
+                                        <span class="badge badge-inicial"><a href="#" class="badge-text">Inicial</a></span>
+                                        <?php
+                                        break;
+                                    case '2':
+                                        ?>
+                                        <span class="badge badge-medium"><a href="#" class="badge-text">Medium</a></span>
+                                        <?php
+                                        break;
+                                    case '3':
+                                        ?>
+                                        <span class="badge badge-premium"><a href="#" class="badge-text">Premium</a></span>
+                                        <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+
+                        <!-- Separador -->
+                        <div class="text-center mt-3">
+                            <a class="a-expand" data-bs-toggle="collapse" href="#card-text-<?= ++$i; ?>" role="button">
+                                Ver detalles
+                            </a>
+                        </div>
+
+                        <div class="collapse" id="card-text-<?= $i; ?>">
+                            <hr style="color:var(--primary);">
+                            <p class="card-text small mb-0">Días: <?= implode(", ", $days); ?></p>
+                            <p class="card-text small">Desde <?= date("d/m/y", strtotime($promo['fechaDesdePromo'])); ?> - Hasta <?= date("d/m/y", strtotime($promo['fechaHastaPromo'])); ?></p>
+                            <p class="card-text"><?= $promo['textoPromo']; ?></p>
+                        </div>
+                      </div>
                     </div>
-                    <div class="collapse" id="card-text">
-                        <hr style="color:var(--primary);">
-                        <p class="card-text small mb-0">Días [Lunes|Martes|Miércoles|Jueves|Viernes|Sábado|Domingo]</p>
-                        <p class="card-text small">Desde xx/xx/xx - Hasta xx/xx/xx</p>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident at consequatur dolores quam iure dolore tenetur inventore repellendus pariatur aspernatur illum fugiat delectus fugit voluptates eos impedit quis, molestiae repudiandae corrupti facere repellat ipsum nesciunt unde amet? Ab iure dolorum natus deserunt amet sit quo aspernatur vitae dolore, molestias aperiam!</p>
-                    </div>
-                  </div>
                 </div>
-            </div>
+                <?php
+            }
+            ?>
         </div>
     </div>
+
+    <br><br><br><br><br><br><br><br><br><br>
 
     <?php include('footer.php'); ?>
     

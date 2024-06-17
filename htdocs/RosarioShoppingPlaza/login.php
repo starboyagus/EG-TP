@@ -28,6 +28,7 @@ if (isset($_SESSION["logged"])) {
         if ($user = $result->fetch_array()) {
             if ($user["claveUsuario"] === $_POST["pass"]) { 
                 $_SESSION["logged"] = true;
+                $_SESSION["userId"] = $user["codUsuario"];
                 $_SESSION["f_name"] = $user["nombreUsuario"];
                 $_SESSION["l_name"] = $user["apellidoUsuario"];
                 $_SESSION["userType"] = $user["tipoUsuario"];
